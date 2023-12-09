@@ -1,29 +1,29 @@
 ﻿using BestHNewsApi.DTOs;
-using Microsoft.Extensions.Options;
 
 namespace BestHNewsApi.Clients
 {
 
     public class HackerNewsApiClient : IHackerNewsApiClient
     {
-        private readonly HackerNewsApiClientOptions _clientOptions;
-        private HttpClient _client;
+        public const string HttpClientFactory = "HackerNewsAPI";
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public HackerNewsApiClient(IOptions<HackerNewsApiClientOptions> clientOptions)
+        public HackerNewsApiClient(IHttpClientFactory httpClientFactory)
         {
-            _client = new HttpClient();
-            _clientOptions = clientOptions.Value;
+            _httpClientFactory = httpClientFactory;
         }
+
+        protected HttpClient HttpClient => _httpClientFactory.CreateClient(HttpClientFactory);
 
         public async Task<IEnumerable<long>> GetBestStories()
         {
-            var bestStories = await _client.GetFromJsonAsync<long[]>($"{_clientOptions.BaseUrl}/v0/beststories.json");
+            var bestStories = await HttpClient.GetFromJsonAsync<long[]>("v0/beststories.json");
             return bestStories ?? Enumerable.Empty<long>();
         }
 
         public async Task<HackerNewsStory> GetStoryDetailsById(long id)
         {
-            var story = await _client.GetFromJsonAsync<HackerNewsStory>($"{_clientOptions.BaseUrl}/v0/item/{id}.json");
+            var story = await HttpClient.GetFromJsonAsync<HackerNewsStory>($"v0/item/{id}.json");
             return story;
         }
     }
