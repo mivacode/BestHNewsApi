@@ -14,6 +14,6 @@
 - Depending on desired deployment scenario, in order to maximize scalability, consider using IDistributedCache together with a distributed cache instance of your choice, instead of local IMemoryCache
 
 ## Execution
-- One can start the app from Visual Studio - e.g. open solution BestHNewsApi.sln and start BestHNewsApi project via built-in IIS Express, this should open a Swagger page at http://localhost:16866/swagger/index.html
+- One can start the app from Visual Studio - e.g. open solution BestHNewsApi.sln and start BestHNewsApi project with 'http' profile, this should open a Swagger page at http://localhost:5120/swagger/index.html
 - Docker image build is present and can be used as well
 - BestHNewsApi.IntegrationTests require an app running locally

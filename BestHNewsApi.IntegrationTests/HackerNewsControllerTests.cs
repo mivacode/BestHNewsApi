@@ -28,7 +28,7 @@ namespace BestHNewsApi.IntegrationTests
             Request = await Playwright.APIRequest.NewContextAsync(new()
             {
                 // All requests we send go to this API endpoint.
-                BaseURL = "http://localhost:16866",
+                BaseURL = "http://localhost:5120",
                 ExtraHTTPHeaders = headers,
             });
         }
