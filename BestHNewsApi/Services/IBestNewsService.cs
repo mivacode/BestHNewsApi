@@ -1,4 +1,4 @@
-﻿using BestHNewsApi.Models;
+﻿using BestHNewsApi.DTOs;
 
 namespace BestHNewsApi.Services
 {

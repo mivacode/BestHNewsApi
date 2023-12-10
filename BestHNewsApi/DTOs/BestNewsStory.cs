@@ -1,4 +1,4 @@
-﻿namespace BestHNewsApi.Models
+﻿namespace BestHNewsApi.DTOs
 {
     public class BestNewsStory
     {

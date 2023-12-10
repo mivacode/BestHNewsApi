@@ -1,4 +1,4 @@
-﻿using BestHNewsApi.Models;
+﻿using BestHNewsApi.DTOs;
 using BestHNewsApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;

@@ -1,6 +1,5 @@
 ﻿using BestHNewsApi.Clients;
 using BestHNewsApi.DTOs;
-using BestHNewsApi.Models;
 
 namespace BestHNewsApi.Services
 {
