@@ -20,7 +20,7 @@ namespace BestHNewsApi.Clients
             _options = options.Value;
         }
 
-        public async Task<IEnumerable<long>> GetBestStories()
+        public async Task<IEnumerable<long>?> GetBestStories()
         {
             return await _memoryCache.GetOrCreateAsync(CacheEntry_GetBestStories, async (cacheEntry) =>
             {
@@ -30,7 +30,7 @@ namespace BestHNewsApi.Clients
             });
         }
 
-        public async Task<HackerNewsStory> GetStoryDetailsById(long id)
+        public async Task<HackerNewsStory?> GetStoryDetailsById(long id)
         {
             return await _memoryCache.GetOrCreateAsync(CacheEntry_GetStoryDetailsById + id, async (cacheEntry) =>
             {

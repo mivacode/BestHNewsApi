@@ -5,8 +5,8 @@ namespace BestHNewsApi.Clients
 {
     public interface IHackerNewsApiClient
     {
-        Task<IEnumerable<long>> GetBestStories();
+        Task<IEnumerable<long>?> GetBestStories();
 
-        Task<HackerNewsStory> GetStoryDetailsById(long id);
+        Task<HackerNewsStory?> GetStoryDetailsById(long id);
     }
 }

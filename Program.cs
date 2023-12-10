@@ -14,10 +14,13 @@ builder.Services.AddSwaggerGen();
 builder.Services.Configure<HackerNewsApiClientOptions>(
     builder.Configuration.GetSection(nameof(HackerNewsApiClientOptions)));
 
-builder.Services.AddHttpClient("HackerNewsAPI", client =>
+builder.Services.AddHttpClient(HackerNewsApiClient.HttpClientFactory, client =>
 {
     var apiOptions = builder.Configuration.GetSection(nameof(HackerNewsApiClientOptions)).Get<HackerNewsApiClientOptions>();
-    client.BaseAddress = new Uri(uriString: apiOptions.BaseUrl);
+    if (apiOptions != null)
+    {
+        client.BaseAddress = new Uri(uriString: apiOptions.BaseUrl ?? string.Empty);
+    }
 })
 .AddTransientHttpErrorPolicy(builder => builder.WaitAndRetryAsync(new[]
 {

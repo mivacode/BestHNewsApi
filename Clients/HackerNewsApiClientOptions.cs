@@ -2,7 +2,7 @@
 {
     public class HackerNewsApiClientOptions
     {
-        public string BaseUrl { get; set; }
+        public string? BaseUrl { get; set; }
         public int? CacheAbsoluteExpiration { get; set; }
     }
 }
