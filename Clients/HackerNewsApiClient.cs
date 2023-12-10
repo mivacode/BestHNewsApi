@@ -15,16 +15,14 @@ namespace BestHNewsApi.Clients
 
         protected HttpClient HttpClient => _httpClientFactory.CreateClient(HttpClientFactory);
 
-        public async Task<IEnumerable<long>?> GetBestStories()
+        public IAsyncEnumerable<long> GetBestStories()
         {
-            var bestStories = await HttpClient.GetFromJsonAsync<long[]>("v0/beststories.json");
-            return bestStories;
+            return HttpClient.GetFromJsonAsAsyncEnumerable<long>("v0/beststories.json");
         }
 
         public async Task<HackerNewsStory?> GetStoryDetailsById(long id)
         {
-            var story = await HttpClient.GetFromJsonAsync<HackerNewsStory>($"v0/item/{id}.json");
-            return story;
+            return await HttpClient.GetFromJsonAsync<HackerNewsStory>($"v0/item/{id}.json");
         }
     }
 }

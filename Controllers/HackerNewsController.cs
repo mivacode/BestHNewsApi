@@ -1,7 +1,7 @@
 ﻿using BestHNewsApi.Models;
 using BestHNewsApi.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using System.ComponentModel.DataAnnotations;
 
 namespace BestHNewsApi.Controllers
 {
@@ -18,19 +18,16 @@ namespace BestHNewsApi.Controllers
             _bestNewsService = bestNewsService;
         }
 
+        /// <summary>
+        /// Retrieves best stories' details from live Hacker News API
+        /// </summary>
+        /// <param name="maxStories">Limits the result to maxStories</param>
+        /// <returns>Top maxStories, after sorting by score, descending</returns>
         [HttpGet(Name = "GetBestStories")]
-        public async Task<IEnumerable<BestNewsStory>> GetAsync(int maxStories)
+        public IAsyncEnumerable<BestNewsStory> GetAsync([Required] int maxStories)
         {
-            var stopWatch = new Stopwatch();
-            try
-            {
-                return await _bestNewsService.GetBestNewsAsync(maxStories);
-            }
-            finally
-            {
-                stopWatch.Stop();
-                _logger.LogDebug($"GetBestStories took {stopWatch.Elapsed}");
-            }
+            _logger.LogDebug($"Requesting GetBestStories(maxStories={maxStories})");
+            return _bestNewsService.GetBestNewsAsync(maxStories);            
         }
     }
 }

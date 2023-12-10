@@ -4,6 +4,6 @@ namespace BestHNewsApi.Services
 {
     public interface IBestNewsService
     {
-        Task<IEnumerable<BestNewsStory>> GetBestNewsAsync(int maxStories);
+        IAsyncEnumerable<BestNewsStory> GetBestNewsAsync(int maxStories);
     }
 }

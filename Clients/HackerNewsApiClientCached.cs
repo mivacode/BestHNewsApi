@@ -20,14 +20,20 @@ namespace BestHNewsApi.Clients
             _options = options.Value;
         }
 
-        public async Task<IEnumerable<long>?> GetBestStories()
+        public async IAsyncEnumerable<long> GetBestStories()
         {
-            return await _memoryCache.GetOrCreateAsync(CacheEntry_GetBestStories, async (cacheEntry) =>
+            var cachedList = await _memoryCache.GetOrCreateAsync(CacheEntry_GetBestStories, async (cacheEntry) =>
             {
                 cacheEntry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(_options.CacheAbsoluteExpiration ?? 60);
-                var bestStoriesResult = await _hackerNewsApiClient.GetBestStories();
+                var bestStoriesResult = await _hackerNewsApiClient.GetBestStories().ToListAsync();
                 return bestStoriesResult;
-            });
+            }) ?? Enumerable.Empty<long>();
+
+            //make this method and async iterator
+            foreach (var item in cachedList)
+            {
+                yield return item;
+            }
         }
 
         public async Task<HackerNewsStory?> GetStoryDetailsById(long id)

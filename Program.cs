@@ -30,8 +30,8 @@ builder.Services.AddHttpClient(HackerNewsApiClient.HttpClientFactory, client =>
 }))
 .AddPolicyHandler(builder =>
 {
-    //allow max 25 concurrent requests to HackerNewsAPI via this named HttpClient
-    return Policy.BulkheadAsync(25, int.MaxValue).AsAsyncPolicy<HttpResponseMessage>();
+    //allow max 50 concurrent requests to HackerNewsAPI via this named HttpClient
+    return Policy.BulkheadAsync(50, int.MaxValue).AsAsyncPolicy<HttpResponseMessage>();
 });
 
 
